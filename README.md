@@ -8,7 +8,12 @@ This web application is part of my final year project at Ngee ann polytechnic wh
 Develop a user-friendly Smart Medicine Box to enable users to consume the right medication(s) at correct time to encourage medication adherence. 
 
 
-### Solution Overview
+## Solution Overview
+### Features:      
+  - Set alarms
+  - Input medication names
+  - Tracking of consumed/missed doses
+
 ![image](https://github.com/user-attachments/assets/a6dbf9eb-0b73-4a1e-9a3f-e8cf79e8e900)
 ![image](https://github.com/user-attachments/assets/1266e17d-ac63-4aef-b50d-55ccfbe7907b)
 ![image](https://github.com/user-attachments/assets/d3454270-6335-40a8-80fe-a2f4a1604447)

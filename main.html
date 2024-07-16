@@ -1,0 +1,385 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--enables web application to encode characters in Unicode -->
+    <meta charset="utf-8">
+    <!-- enables web app to be responsive to different screen sizes -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--specify the title of the web page -->
+    <title>Smart Medicine Box</title>
+     <!--link to external css style sheets-->
+    <link href="main.css" rel="stylesheet" />
+    <!--link to external bootstrap style sheets-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!--points to an external libraries-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="moment.js"></script>
+
+
+
+
+
+<!-- SDKs for Firebase products used -->
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
+
+<script>
+  // firebase configuration
+  var firebaseConfig = {
+
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+ <!--Point to main JavaScript file-->
+<script src="main.js"></script>
+</head>
+<body>
+     <!--full width container, spanning the entire width of your viewport-->
+     <!--########################### HEADER BAR ##########################-->
+    <div class="container-fluid" id="header">
+        <!--separate row to three columns of ratio 1:7:4-->
+            <div class="row">
+                <div class="col-sm-1">
+                <nav>   <!--button to open/close side navigation bar-->
+                        <button type="button" id="sidebarCollapse" class="btn">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                </nav>
+                </div>
+            <div class="col-sm-8">
+                <!--icon and title in header bar-->
+                <p class = "main_title"> <img src = "A-med_logo_purple.PNG"</p>
+    <!--<h2 class = "main_title"><i class='fas fa-pills fa-lg';color:white></i> A-Med Pill Dispenser</h2>-->
+</div>
+
+    <div class="col-sm-3"></div>
+    <!--date and time display in header bar-->
+    <h3  id="datetime_disp"></h3>
+    </div>
+</div>
+</div>
+    <div class="wrapper"  >
+           <!--################### SIDE NAVIGATION BAR ###############################-->
+           <nav  id="sidebar">
+               <div class="sidebar-header">
+                   <!--user icon-->
+                <i class='fas fa-user-circle' style='font-size:36px'></i>
+                <!--display of user name-->
+                        <h4 id="userPfFullName"></h4>
+               </div>
+
+            <!--navigation tabs-->
+           <div class="nav nav-tabs" >
+               <ul class="list-unstyled components">
+                   <li class="active"><a data-toggle="tab" href="#home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                   <li><a data-toggle="tab" href="#alarms"><span class="glyphicon glyphicon-bell"></span> Set Alarms</a></li>
+                   <li><a data-toggle="tab" href="#medication"><span class="glyphicon glyphicon-edit"></span> Add Medication</a></li>
+                   <li><a data-toggle="tab" href="#history"><span class="glyphicon glyphicon-calendar"></span> Dosage History</a></li>
+                   <li><a data-toggle="tab" href="#exit"><span class="glyphicon glyphicon-log-out"></span> Exit</a></li>
+               </ul>
+       </div>
+   </nav>
+   <!--navigation tab contents-->
+       <div id="content" class="tab-content">
+          <!--home tab; displays alarm time, medications added and missed doses-->
+           <div id="home" class="tab-pane fade in active">
+               <div class="container-fluid" style="text-align: center;">
+                <!--large bootstrap well that display alarm timings for morning, afternoon, evening alarms-->
+                <div class="well well-lg" style="margin-top: 8pt;">
+                  <h1>Alarms Set</h1>
+                  <!--morning, afternoon and evening alarms are displayed in 3 separate columns-->
+                  <div class="row">
+                    <div class="col-sm-4">
+                        <!--morning alarm-->
+                    <h3>Morning:</h3>
+                        <h3 id="alarm1_home" ></h3>
+                </div>
+                    <div class="col-sm-4">
+                        <!--afternoon alarm-->
+                        <h3>Afternoon:</h3>
+                        <h3  id="alarm2_home" ></h3>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <!--evening alarm-->
+                        <h3>Evening:</h3>
+                        <h3 id="alarm3_home" ></h3>
+
+                </div>
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-8">
+                      <!--bootstrap panels to display medications added-->
+                    <div class="panel panel-default" style="text-align: center;">
+                        <div class="panel-heading" style="background-color:#a3dfee;"><h2>Medications</h2></div>
+                      <!--morning medications-->
+                        <div class="panel-heading">Morning:</div>
+                      <div class="panel-body" id="morn_med_home"></div>
+                      <!--afternoon medications-->
+                      <div class="panel-heading">Afternoon:</div>
+                      <div class="panel-body" id="noon_med_home"></div>
+                      <!--evening medications-->
+                      <div class="panel-heading">Evening:</div>
+                      <div class="panel-body" id="even_med_home"></div>
+                    </div>
+
+                </div>
+                  <div class="col-sm-4">
+                    <!--bootstrap list groups with badges to display missed doses for morning, afternoon and evening medication-->
+                        <ul class="list-group">
+                            <li class="list-group-item"><h3 class="text-primary">Missed Dosages </h3></li>
+                            <li class="list-group-item">Morning <span class="badge" id="morn_missed"></span></li>
+                            <li class="list-group-item">Afternoon <span class="badge" id="noon_missed"></span></li>
+                            <li class="list-group-item">Evening<span class="badge" id="even_missed"></span></li>
+                          </ul>
+                </div>
+              </div>
+                </div>
+        </div>
+
+            <!--Set Alarms tab-->
+           <div id="alarms" class="tab-pane fade">
+
+               <div class="main">
+                   <!--header for Set Alarms page-->
+                    <h1 class="h1"><span>Set Alarms</span></h1>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <!--header for setting morning alarm-->
+                            <p class="alarm_label">Morning Alarm</p><br>
+                            <!--time input entry-->
+                            <input class=combo1 id="alarm_1" type="time">
+                            <br>   <br>
+
+                            <div class="form-group"  align="center" >
+                                <!--morning food combo box-->
+                            <select style="width:auto;" class="form-control"  name="morn_select" id="morn_select" onchange="morn_combo()">
+                                <option  value="0">Before or After Food</option>
+                                <option  value="1">After Food</option>
+                                <option value="2">Before Food</option>
+
+                            </select>
+                        </div>
+                            <!--button to set morning alarm-->
+                            <input type="button" value="Set Morning Alarm" class="btn btn-primary" onclick="insert1()" />
+                            <br>
+                            <!--display morning alarm-->
+                            <p class=combo1 id="alarm1" ></p>
+
+                        </div>
+                        <div class="col-sm-4">
+                             <!--header for setting afternoon alarm-->
+                            <p class="alarm_label">Afternoon Alarm</p>
+                            <br>
+                             <!--time input entry-->
+                             <input class=combo1 id="alarm_2" type="time">
+                            <br><br>
+                            <div class="form-group"  align="center" >
+                                 <!--afternoon food combo box-->
+                                <select style="width:auto;" class="form-control" name="noon_select" id="noon_select" onchange="noon_combo()">
+
+                                    <option  value="0">Before or After Food</option>
+
+                                    <option  value="1">After Food</option>
+                                    <option value="2">Before Food</option>
+
+                                </select>
+                            </div>
+                             <!--button to set afternoon alarm-->
+                            <input type="button" value="Set Noon Alarm" class="btn btn-primary" onclick="insert2()" />
+                            <!--display afternoon alarm-->
+                            <p class=combo1 id="alarm2" ></p>
+                        </div>
+
+                        <div class="col-sm-4">
+                             <!--header for setting evening alarm-->
+                            <p class="alarm_label">Evening Alarm</p>
+                            <br>
+                             <!--time input entry-->
+                            <input class=combo1 id="alarm_3" type="time">
+                            <br><br>
+
+                            <div class="form-group"  align="center" >
+                                 <!--evening food combo box-->
+                                <select style="width:auto;" class="form-control" name="even_select" id="even_select" onchange="even_combo()">
+
+                                    <option   value="0">Before or After Food</option>
+                                    <option  value="1">After Food</option>
+                                    <option  value="2">Before Food</option>
+
+
+                                </select>
+                            </div>
+                                 <!--button to set evening alarm-->
+                            <input type="button" value="Set Evening Alarm" class="btn btn-primary" onclick="insert3()" />
+                           <!--display evening alarm-->
+                            <p class=combo1 id="alarm3" ></p>
+                        </div>
+                      </div>
+
+                    </div>
+
+           </div>
+            <!--Add Medication tab-->
+           <div id="medication" class="tab-pane fade"  >
+
+            <div class="main">
+            <!--header for Add Medication page-->
+                <h1 class="h1"><span>Add Medication</span></h1>
+               <div class="row">
+                <div class="col-sm-4">
+                    <!--header for inputting morning medications-->
+                    <br><p class="med_label">Morning Medication(s)</p>
+                    <br>
+                    <!--add morning medication text box-->
+                    <textarea class="textbox" id="morn_meds" placeholder="Write your medication(s) here..." rows="8"  maxlength="192" ></textarea>
+                    <br><br>
+                    <!--button to save the inputs in morning medication text box-->
+                    <input type="button" value="Save" class="btn btn-primary" onclick="save1()" />
+                    <br><br>
+                </div>
+                <div class="col-sm-4">
+                    <!--header for inputting afternoon medications-->
+                    <br><p class="med_label">Afternoon Medication(s)</p>
+                    <br>
+                     <!--add afternoon medication text box-->
+                    <textarea class="textbox" id="noon_meds" placeholder="Write your medication(s) here..." rows="8"  maxlength="192" ></textarea>
+                    <br><br>
+                    <!--button to save the inputs in afternoon medication  text box-->
+                    <input type="button" value="Save" class="btn btn-primary" onclick="save2()" />
+                    <br><br>
+                </div>
+                <div class="col-sm-4">
+                    <!--header for inputting evening medications-->
+                    <br><p class="med_label">Evening Medication(s)</p><br>
+                     <!--add evening medication text box-->
+                    <textarea class="textbox" id="even_meds" placeholder="Write your medication(s) here..." rows="8"  maxlength="192" ></textarea>
+                    <br><br>
+                    <!--button to save the inputs in evening medication text box-->
+                    <input type="button" value="Save" class="btn btn-primary" onclick="save3()" />
+                    <br><br>
+
+                    <br>
+                </div>
+              </div>
+            </div>
+           </div>
+            <!--Dosage History tab-->
+           <div id="history" class="tab-pane fade">
+        <div class="main">
+        <div class="container-fluid">
+               <div id= "current" class="section1">
+                   <!--header for Current Dosage History page-->
+                <h1 class="h1"><span>Current Dosage History</span></h1>
+                <!--displays this week's dosage history-->
+            <div id="currentdosage">
+                <table class="hi">
+                    <!--contains this week's dates-->
+                    <tr id="date" class="selected">
+                    </tr>
+                    <!--table row containing days of a week-->
+                    <tr class="selected">
+                        <td>Day</td>
+                        <td>Mon</td>
+                        <td>Tues</td>
+                        <td>Wed</td>
+                        <td>Thur</td>
+                        <td> Fri </td>
+                        <td>Sat</td>
+                        <td>Sun</td>
+                    </tr>
+                    <!--contains this week's morning dosage history-->
+                    <tr id="morning_dosage">
+                    </tr>
+                    <!--contains this week's afternoon dosage history-->
+                    <tr id="afternoon_dosage">
+                    </tr>
+                    <!--contains this week's evening dosage history-->
+                    <tr id="evening_dosage">
+                    </tr>
+                </table>
+
+
+            </div>
+                <input type="button" value="Last Week's Dosage History" class="btn btn-primary" onclick="showlastweek()" />
+            </div>
+            <div id= "lastweek" class="section1">
+                <!--header for Last Week's  Dosage History page-->
+                <h1 class="h1"><span>Last Week's Dosage History</span></h1>
+                <!--displays last week's dosage history-->
+                <div id="showlastweek">
+
+                    <table >
+                        <!--contains last week's dates-->
+                        <tr id="past_dates">
+
+                        </tr>
+                        <!--table row containing days of a week-->
+                        <tr class="selected">
+                            <td>Day</td>
+                            <td>Mon</td>
+                            <td>Tues</td>
+                            <td>Wed</td>
+                            <td>Thur</td>
+                            <td> Fri </td>
+                            <td>Sat</td>
+                            <td>Sun</td>
+                        </tr>
+                        <!--contains last week's morning dosage history-->
+                        <tr id="past_morn_dosage">
+
+                        </tr>
+                        <!--contains last week's afternoon dosage history-->
+                        <tr id="past_noon_dosage">
+
+                        </tr>
+                        <!--contains last week's evening dosage history-->
+                        <tr id="past_even_dosage">
+
+                        </tr>
+
+                    </table>
+                </div>
+                <!--button to show current dosage history, hide last week's dosage history and vice versa-->
+                <input type="button" value="Current Dosage History" class="btn btn-primary" onclick="showcurrent()" />
+            </div>
+        </div>
+    </div>
+           </div>
+            <!--Exit tab-->
+              <div id="exit" class="tab-pane fade">
+                  <div class="main">
+                      <!--header of Exit page-->
+               <h1 class="h1"><span>Return to Log In page</span></h1>
+               <br>
+               <!--button to sign out-->
+               <button type="button" class="btn btn-primary" onclick="signOut()">
+                   Sign Out<small></small></button>
+                </div>
+           </div>
+   </div>
+   </div>
+       <script >
+       //jquery code to toggle between open/ close side navigation bar
+           $(document).ready(function () {
+               $('#sidebarCollapse').on('click', function () {
+                   $('#sidebar').toggleClass('active');
+                   $(this).toggleClass('active');
+               });
+           });
+       </script>
+
+</body>
+
+</html>

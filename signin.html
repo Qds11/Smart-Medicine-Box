@@ -1,0 +1,84 @@
+
+<html>
+  <head>
+    <!--specify the title of the web page -->
+      <title>Smart Medicine Box Sign In Form</title>
+      <!--enables web application to encode characters in Unicode -->
+      <meta charset="utf-8">
+      <!-- enables web app to be responsive to different screen sizes -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!--link to external css style sheets-->
+      <link rel="stylesheet" href="signin.css"/>
+     <!-- SDKs for Firebase products used -->
+      <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script>
+
+
+<!-- link to bootstrap 3 style sheets -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<script>
+// Firebase configuration
+var firebaseConfig = {
+
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+</script>
+      <!--Point to main JavaScript file-->
+      <script src="main.js"></script>
+  </head>
+    <body>
+      <div class="main_in">
+        <!--full width container, spanning the entire width of your viewport-->
+        <div class="container-fluid">
+          <!--header for sign in page-->
+          <h2>A-Med<br>Sign In Form</h2>
+          <!--use of form groups to organise each section-->
+              <div class="form-group">
+                <!--label for email input field-->
+                  <label for="userSIEmail">Email address<span
+                       class="text-danger ml-1">*</span></lable>
+                  <div class="input-group">
+                    <!--use of input-group to add icons next to input fields-->
+                      <span class="input-group-addon"><i class=
+                          "glyphicon glyphicon-user"></i></span>
+                          <!--email input field-->
+                      <input id="userSIEmail"  type="text" class="form-control"
+                       name="email"  onblur="checkUserSIEmail()" placeholder="mail@mail.com">
+                  </div>
+                  <!--text to guide user-->
+                  <span class="help-block"  id="userSIEmailError" >
+                      Please check your login information.</span>
+              </div>
+               <!--use of form groups to organise each section-->
+              <div class="form-group">
+                <!--label for password input field-->
+                  <label for="userSIPassword">Password<span
+                      class="text-danger ml-1">*</span></label>
+                      <!--use of input-group to add icons next to input fields-->
+                  <div class="input-group">
+                      <span class="input-group-addon"><i
+                          class="glyphicon glyphicon-lock"></i></span>
+                          <!--password input field-->
+                          <input type="password" class="form-control"id="userSIPassword"
+                          onblur="checkUserSIPassword()" placeholder="password">
+                  </div>
+                  <!--text to guide user-->
+                  <span class="help-block"  id="userSIPasswordError" >
+                      Please check your password.</span>
+              </div>
+               <!--use of form groups to organise each section-->
+              <div class="form-group">
+                <!--sign in button-->
+                  <button type="button" class="btn btn-warning btn-block" onclick="signIn()">
+                      <span class="glyphicon glyphicon-log-in"></span>  Sign In </button>
+              </div>
+              <!--link to sign up page; directs users to sign up page-->
+              <p>Not a member yet? Become a member: <a href="sign-up.html">
+                  <strong><br>Sign Up</strong></a></p>
+        </div>
+      </div>
+    </body>
+</html>

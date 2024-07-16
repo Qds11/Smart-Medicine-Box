@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--specify the title of the web page -->
+    <title>Smart Medicine Box Sign Up Form</title>
+    <!--enables web application to encode characters in Unicode -->
+    <meta charset="utf-8" />
+    <!-- enables web app to be responsive to different screen sizes -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--link to external css style sheets-->
+    <link rel="stylesheet" href="signup.css" />
+    <!-- SDKs for Firebase products used -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script>
+    <!-- link to bootstrap 3 style sheets-->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <!--points to an external jquery and bootstrap libraries-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script>
+      //Firebase configuration
+      var firebaseConfig = {};
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+    <!--Points to mainJavaScript file-->
+    <script src="main.js"></script>
+  </head>
+  <body>
+    <div class="main_up">
+      <!--full width container, spanning the entire width of your viewport-->
+      <div class="container-fluid">
+        <!--header for sign in page-->
+        <h2>A-Med<br />Sign Up Form</h2>
+        <br />
+        <!--use of form groups to organise each section-->
+        <div class="form-group">
+          <!--label for product ID input field-->
+          <label for="productID"
+            >Product ID<span class="text-danger ml-1">*</span></label
+          >
+          <!--tooltip: small pop up appears when user places the mouse pointer over element-->
+          <a
+            href="#"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Your Product ID should be provided on the bottom of your A-Med device."
+            ><small>What is this?</small></a
+          >
+          <!--use of input-group to add icons next to input fields-->
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><i class="glyphicon glyphicon-tag"></i
+            ></span>
+            <input
+              type="text"
+              class="form-control"
+              id="productID"
+              onblur="checkproductID()"
+              placeholder="Product ID"
+            />
+          </div>
+          <!--text to guide user-->
+          <span class="help-block" id="productIDError"
+            >This Field must be filled.</span
+          >
+        </div>
+        <!--use of form groups to organise each section-->
+        <div class="form-group">
+          <!--label for name input field-->
+          <label for="userFullName"
+            >Name<span class="text-danger ml-1">*</span></label
+          >
+          <!--use of input-group to add icons next to input fields-->
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><i class="glyphicon glyphicon-user"></i
+            ></span>
+            <input
+              type="text"
+              class="form-control"
+              id="userFullName"
+              onblur="checkUserFullName()"
+              placeholder="name"
+            />
+          </div>
+          <!--text to guide user-->
+          <span class="help-block" id="userFullNameError"
+            >This Field must be filled.</span
+          >
+        </div>
+        <!--use of form groups to organise each section-->
+        <div class="form-group">
+          <!--label for email input field-->
+          <label for="userEmail"
+            >Email address<span class="text-danger ml-1">*</span></label
+          >
+          <!--use of input-group to add icons next to input fields-->
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><i class="glyphicon glyphicon-user"></i
+            ></span>
+            <input
+              type="email"
+              class="form-control"
+              id="userEmail"
+              onblur="checkUserEmail()"
+              placeholder="mail@mail.com"
+            />
+          </div>
+          <!--text to guide user-->
+          <span class="help-block" id="userEmailError"
+            >Please check your email address.</span
+          >
+        </div>
+        <!--use of form groups to organise each section-->
+        <div class="form-group">
+          <!--label for password input field-->
+          <label for="userPassword"
+            >Password<span class="text-danger ml-1">*</span></label
+          >
+          <!--use of input-group to add icons next to input fields-->
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><i class="glyphicon glyphicon-lock"></i
+            ></span>
+            <input
+              type="password"
+              class="form-control"
+              id="userPassword"
+              onblur="checkUserPassword()"
+              placeholder="******"
+            />
+          </div>
+          <!--text to guide user-->
+          <span class="help-block" id="userPasswordError"
+            >Your password must be lowercase, contain numbers and more than 6
+            characters.</span
+          >
+        </div>
+        <!--use of form groups to organise each section-->
+        <div class="form-group">
+          <!--sign up button-->
+          <button
+            type="button"
+            class="btn btn-warning btn-block"
+            onclick="signUp()"
+          >
+            Sign Up
+          </button>
+        </div>
+        <!--link to sign in page; directs users to sign in page-->
+        <p>
+          Already a member? <span class="glyphicon glyphicon-log-in"></span>
+          <a href="index.html"><strong> Sign In</strong></a>
+        </p>
+      </div>
+    </div>
+    <script>
+      // jQuery code to initialize all tooltip
+      $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+    </script>
+  </body>
+</html>

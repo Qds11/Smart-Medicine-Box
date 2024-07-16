@@ -1,0 +1,271 @@
+/*import poppins font style*/
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+/*style body tag elements*/
+/*set web app to stretch to full screen*/
+body {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+/*style tab contents*/
+.tab-content{
+    background-color:lightyellow;
+    width: 100%;
+    min-height: 100vh;
+}
+
+
+/*style header bar*/
+#header {
+    z-index: 9999;
+    /*enable header bar to be fixed on top of screen despite user's scroll position*/
+    position: sticky;
+    top: 0px;
+    background-color:#3c114d;
+    color: #ffffff;
+    height: 70px;
+    width: 100%;
+}
+
+/*set positioning for dosage history page contents*/
+.section1 {
+    margin-top: 50px;
+    margin-bottom: 10px;
+    border-radius: 10px;   
+}
+
+
+/*style table cells containg days and dates in dosage history page*/
+.selected {
+    font-size: 15pt;
+    background-color: #f36f48;
+    font-weight: bold;
+    color: white;
+}
+
+/*style nav bar and tab contents*/
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    perspective: 1500px;
+}
+
+/*style for side navigation bar*/
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: #7386D5;
+    color: rgba(199, 198, 198, 0.664);
+    font-family: 'Poppins', sans-serif;
+    transform-origin: bottom left;
+}
+
+/*removes side bar when closed*/
+#sidebar.active {
+    margin-left: -250px;
+}
+
+/*style side nav bar title; user icon + "Welcome user"*/
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: #3c456d;
+    text-align: center;
+    color:#fff;
+}
+
+/*style table for dosage history page*/
+table {
+    align-self: center;
+    background-color: #ffffff;
+    margin-left: 70pt;
+    margin-top: 30pt;
+    margin-bottom: 10pt;
+    z-index: 1;
+}
+
+/*style table for dosage history page*/
+table, th, td {
+    width:85%;
+    border: 2px solid #cecece;
+    border-collapse: collapse;
+    text-align: center;
+    table-layout: fixed;
+    height:45px;
+
+}
+
+
+/*style side nav bar nav tabs*/
+#sidebar ul li a {
+    font-size: 25pt;
+    text-align: left;
+    color: #ebe9e9;
+    padding: 12px;
+    font-size: 1.1em;
+    display: block;
+    padding-left: 20pt;
+
+}
+
+/*specific nav tab will be highligted when cursor hovers over it*/
+#sidebar ul li a:hover {
+    color: #7386D5;
+    background: rgba(255, 255, 255, 0.842);
+}
+
+/*specific nav tab will be highligted when selected/ clicked on*/
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+    color: #7386D5;
+    background: rgba(255, 255, 255, 0.842);
+}
+
+/*style button to open/close side nav bar*/
+#sidebarCollapse {
+    width: 40px;
+    height: 40px;
+    background: #d1c9c980;
+    cursor: pointer;
+}
+
+/*style "lines" in button to open/close side nav bar*/
+#sidebarCollapse span {
+    width: 80%;
+    height: 2px;
+    margin: 0 auto;
+    display: block;
+    background: #03030380;
+    transition-delay: 0.2s;
+}
+
+ 
+/*lines in button to form an X*/
+#sidebarCollapse span:first-of-type {
+    transform: rotate(45deg) translate(2px, 2px);
+    background: #4d4c4c;
+}
+
+#sidebarCollapse span:last-of-type {
+    transform: rotate(-45deg) translate(1px, -1px);
+    background: #4d4c4c;
+}
+
+/*make one line in button transparent when side nav bar is opened*/
+#sidebarCollapse span:nth-of-type(2) {
+    opacity: 0;
+    background: #4d4c4c;
+}
+
+/*make transparent line in button opaque when side nad bar is closed*/
+#sidebarCollapse.active span {
+    transform: none;
+    opacity: 1;
+    margin: 5px auto;
+}
+
+
+/*style text in table cells for dosage history*/
+.input{  
+     font-size: 10pt;
+     color: black;    
+}
+
+/*style text box for user input of medication names*/
+.textbox{
+    font-size:15pt;
+    width:80%;
+    margin-top: 5px;
+    outline: 5px, solid #000000;
+}
+
+
+/*style tab content page headers*/
+h1 span {
+    border: 5px dashed #20bcd5;
+    padding: 15px;
+    font-size:32pt;
+    font-family: 'Trebuchet MS';
+
+}
+
+/*style header for setting morn, noon, evening alarms*/
+.alarm_label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 23pt;
+    margin-top: 40px;
+    text-decoration: underline;   
+}
+
+/*styling for time input*/
+.combo1 {
+    margin-top:5px;
+    font-family: "Arial";
+    font-size: 20pt;
+    color: #000000;
+
+}
+
+
+/*styling for each tab content page*/
+.main {
+    margin-top: 30pt;
+    text-align: center;
+}
+
+
+/*style header for inputting morn, noon, evening medications*/
+.med_label {
+    margin-top: 20pt;
+    font-size: 15pt;
+    background-color:powderblue;
+}
+.btn{
+    margin-top: 10pt;
+}
+.main_title{
+    margin-top:10px;
+}
+
+/*enables main page to be responsive*/
+/*format main page to fit in screen of mobile phones*/
+/* For mobile phones: */
+@media only screen and (max-width: 780px) {
+    [class*="col-"] {
+      width: 100%;}    
+    .main_title{
+       text-align: center;
+       margin-top:0px;
+    } 
+    .btn{
+        margin-top: 7pt;
+    }   
+
+    #datetime_disp {
+    
+        display: none;}      
+      #header{
+          height:100px;}      
+      h1 span{
+        display: none;}     
+      .selected{
+          font-size: 8pt;}      
+      .input{
+          font-size:5pt;}      
+      table{
+          width: 100%;
+          margin-left: 0pt;}             
+     #sidebar {
+        min-width: 160px;
+        max-width: 160px;}    
+    .combo1{
+        font-size: 10pt;}   
+    #sidebar.active {
+        margin-left: -160px;}    
+    #sidebar ul li a {
+        padding: 8px;}   
+}
+
+
